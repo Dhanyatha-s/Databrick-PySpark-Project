@@ -62,7 +62,16 @@ LIMIT 1;
 
 -- 3. **Funding and Budget Management:** Assess current funding, budget allocations, and financial planning for future expansions.
 
-
+create View Fundings_Report as
+SELECT 
+    Funding_Source,
+    SUM(Budget_Allocation) AS Total_budget,
+    COUNT(*) AS Total_Projects, 
+    YEAR(Production_Date) AS Year
+FROM ev_data
+WHERE YEAR(Production_Date) in (2024, 2025)
+GROUP BY Funding_Source, YEAR(Production_Date)
+ORDER BY Year DESC, Total_budget DESC;
 
 
 
